@@ -135,6 +135,7 @@ public class Field
 					if(checkPlace(x, y+3-l))
 						putShip(l, x, y, o);
 				}
+				// Hello world!!!
 			}
 		}
 	}
