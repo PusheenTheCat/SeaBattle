@@ -1,4 +1,4 @@
-import java.awt.BasicStroke;
+﻿import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,8 +20,8 @@ public final class DrawField extends JPanel
     public void paint(Graphics g)
     {
         super.paint(g);
-        Graphics2D g2D = (Graphics2D)g;
-        g2D.setStroke(new BasicStroke(1.0f));
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setStroke(new BasicStroke(1.0f));
 
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, 255, 255);
@@ -33,15 +33,15 @@ public final class DrawField extends JPanel
             g.drawLine(0, i*size, size*10, i*size); //горизонтальные линии
         }
 
-        g2D.setStroke(new BasicStroke(4.0f));
-        g2D.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(4.0f));
+        g2d.setColor(Color.BLACK);
 
-        g2D.drawLine(0, 0, size*10, 0);
-        g2D.drawLine(0, 0, 0, size*10);
-        g2D.drawLine(size*10, 0, size*10, size*10);
-        g2D.drawLine(0, size*10, size*10, size*10);
+        g2d.drawLine(0, 0, size*10, 0);
+        g2d.drawLine(0, 0, 0, size*10);
+        g2d.drawLine(size*10, 0, size*10, size*10);
+        g2d.drawLine(0, size*10, size*10, size*10);
 
-        g2D.setStroke(new BasicStroke(2.0f));
+        g2d.setStroke(new BasicStroke(2.0f));
         for (int i = 0; i < field.length; i++)
             for (int j =0; j < field.length; j++)
             {
