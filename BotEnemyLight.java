@@ -2,11 +2,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class BotEnemyLight implements Bot 
+public class BotEnemyLight implements Bot
 {
-	public void enemyShot(Graphics g, Field f)
-	{
-		final Random random = new Random();
+    Graphics g;
+    Field f;
+
+    public BotEnemyLight(Graphics g, Field f){
+        this.g = g;
+        this.f = f;
+    }
+    public void enemyShot()
+
+    {
+        final Random random = new Random();
         int x, y;
         do{
             do{
@@ -31,9 +39,9 @@ public class BotEnemyLight implements Bot
             {
                 g.setColor(Color.BLUE);
                 g.fillOval(x*25+10, y*25+10, 4, 4);
-            }   
+            }
             g.setColor(Color.BLACK);
-            
+
             if (flag)
                 if (f.checkKilled(x, y))
                 {
@@ -42,11 +50,11 @@ public class BotEnemyLight implements Bot
                 }
             g.setColor(Color.BLACK);
             if (f.getStatus(x, y) != 0)
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
         }while (f.getStatus(x, y) != 0 && f.checkVictory() != true);
-	}
+    }
 }
