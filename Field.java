@@ -5,7 +5,7 @@ public class Field
 	private int[][] field;  //—осто€ние €чейчки: 0 - вода, 1 - целый корабль, 2 - раненый корабль
 	private boolean[][] shooted;
 	private int size, alive;
-	private enum Orientation {HORIZONTAL, VERTICAL}
+	public enum Orientation {HORIZONTAL, VERTICAL}
 	
 	public Field()
 	{
@@ -37,7 +37,7 @@ public class Field
 			}
 	}
 	
-	private boolean checkPlace(int x, int y)
+	public boolean checkPlace(int x, int y)
 	{
 		assert((x >= 0) && (x < size) && (y >= 0) && (y < size));
 		
@@ -50,11 +50,17 @@ public class Field
 			}
 		return true;
 	}
-	
-	private void putShip(int length, int x, int y, Orientation o)
+        
+	public void putShip(int length, int x, int y, Orientation o)
 	{
 		assert((x >= 0) && (x < size) && (y >= 0) && (y < size) && (length >=0) && (length < 4));
 		
+                if (length == 0)
+                {
+                    field[x][y] = 1;
+                    return;
+                }
+                
 		switch(o)
 			{
 				case VERTICAL:
@@ -138,7 +144,7 @@ public class Field
 		}
 	}
 	
-	public void setHand(int x, int y, int o, int length)
+	public boolean setHand(int x, int y, int o, int length)
 	{
 		Orientation orient;
 		
@@ -149,23 +155,32 @@ public class Field
 		
 		if(checkPlace(x, y))
 		{
+                    if (length == 0)
+                        return true;
+                    else          
 			switch(orient)
 			{
 				case VERTICAL:
 				{
 					if(checkPlace(x+3-length, y))
-						putShip(length, x, y, orient);
+						return true;
+                                        else
+                                            return false;
 				}
 				default:
 				{
 					if(checkPlace(x, y+3-length))
-						putShip(length, x, y, orient);
+						return true;
+                                        else
+                                            return false;
 				}
 			}
 		}
+                else
+                    return false;
 	}
 	
-	private void fillWater(int x, int y)
+	public void fillWater(int x, int y)
 	{
 		int i = x;
 		while (i < size)
@@ -180,7 +195,7 @@ public class Field
 					
 			i++;
 		}
-		
+                
 		i = x;
 		while (i >= 0)
 		{
@@ -226,10 +241,10 @@ public class Field
 	
 	public boolean checkKilled(int x, int y)
 	{
-		assert((x >= 0) && (x < size) && (y >= 0) && (y < size));
+    		assert((x >= 0) && (x < size) && (y >= 0) && (y < size));
 		
 		int i = x;
-		while (i < size)
+        	while (i < size)
 		{
 			if (field[i][y] == 1)
 				return false;
@@ -304,6 +319,10 @@ public class Field
 		return field;
 	}
 	
+        public boolean[][] getShooted(){
+                return shooted; 
+        }
+                
 	public boolean getShooted(int x, int y){
 		return shooted[x][y];
 	}
@@ -316,3 +335,4 @@ public class Field
 		return size;
 	}
 }
+
